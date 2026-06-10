@@ -18,7 +18,7 @@ public:
     vec3 pixel_delta_v;
     vec3 viewport_upper_left;
     vec3 pixel00_loc;
-    unsigned int sample_count = 100;
+    unsigned int sample_count = 300;
     double focal_length = 1.0;
     double aspect_ratio;
     double viewport_height = 2.0;

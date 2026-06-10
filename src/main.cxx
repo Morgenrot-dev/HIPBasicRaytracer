@@ -38,7 +38,7 @@ int main()
     world.add(sphere(vec3(0,-100.5,-1), 100));
 
 
-    Camera main_camera = Camera(512, 16.0 / 9, {0,0,0});
+    Camera main_camera = Camera(1080, 16.0 / 9, {0,0,0});
 
     vec3* image = NULL;
 

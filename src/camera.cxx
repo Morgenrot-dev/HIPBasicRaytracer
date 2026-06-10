@@ -65,9 +65,7 @@ __device__ vec3 nr_ray_color(const ray& r, const hittable_list& world, hiprandSt
 
 __device__ vec3 nr_ray_color(const ray& r, const hittable_list& world, hiprandStateXORWOW_t* generatorState, int idx, int idy)
 {
-    if(idx == 256 && idy == 100)
-            printf("New sample\n\n");
-    
+        
     hit_record rec;
     bool hit = false;
     ray new_ray;
@@ -75,17 +73,13 @@ __device__ vec3 nr_ray_color(const ray& r, const hittable_list& world, hiprandSt
     vec3 direction = random_unit_vector(generatorState) + rec.normal;
     new_ray = ray(rec.point, direction);
 
-    if(idx == 256 && idy == 100)
-            printf("First ray result hit anything: %d\n", hit);
-    
+        
     //"Bouncing" too much
     for(int index = 0; index < 10; index++){
         if(hit == 0 )
         {break;}
 
-        if(idx == 256 && idy == 100)
-            printf("Color Prodresult: %f, %f, %f\n", color_product.x, color_product.y, color_product.z);
-        
+                
 
         vec3 bounce_color = ray_color(new_ray, world, rec, &hit);
         color_product.x *= bounce_color.x;
@@ -93,23 +87,18 @@ __device__ vec3 nr_ray_color(const ray& r, const hittable_list& world, hiprandSt
         color_product.z *= bounce_color.z;
         vec3 direction = random_unit_vector(generatorState) + rec.normal;
 
-        if(idx == 256 && idy == 100)
-            printf("bounce_color: %f, %f, %f\n", bounce_color.x, bounce_color.y, bounce_color.z);
+		
+		new_ray = ray(rec.point, direction);
+		
 
-        if(idx == 256 && idy == 100)
-            printf("hitsomething: %d\n", rec.hit);
-
-        new_ray = ray(rec.point, direction);
-        
-
-    }
-    
-    return color_product;
+	    }
+	    
+	    return color_product;
 
 
-}
+	}
 
-__global__ static void render_image(vec3* image, int total_image_width, int total_image_height, Camera camera_class, hittable_list* world, hiprandStateXORWOW_t* generator)
+	__global__ static void render_image(vec3* image, int total_image_width, int total_image_height, Camera camera_class, hittable_list* world, hiprandStateXORWOW_t* generator)
 {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -154,8 +143,7 @@ __global__ static void render_image(vec3* image, int total_image_width, int tota
         
     }
 
-    if(idx == 256 && idy == 100)
-        printf("Color: %f, %f, %f\n", color.x, color.y, color.z);
+
     
     color = color * camera_class.sample_scale;
 
@@ -163,22 +151,6 @@ __global__ static void render_image(vec3* image, int total_image_width, int tota
         image[idx + (idy * total_image_width)] = color;
 
     
-    if(idx == 0 && idy == 0)
-        printf("Kernel finishing\n");
-    /*
-    if(idy == 71)
-    {
-        int red = 255.999 * (float)(idx+1)/total_image_width;
-        int green = 255.999 * (float)(idy+1)/total_image_height;
-        //printf("idy: %i", idy);
-        printf("R: %i G: %i B: %i\n", red, green, 1);
-
-    }
-    //printf("idy: %i\n", idy);
-    if(idx < total_image_width && idy < total_image_height)
-        image[idx + (idy * total_image_width)] = 255.999 * color((float)idx/total_image_width, (float)idy/total_image_height, 1);
-    
-    */
 }
 
 
