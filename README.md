@@ -27,7 +27,7 @@ main.cxx
         ├── init_rand<<<grid,block>>>   seed per-pixel RNG
         ├── render_image<<<grid,block>>> trace + sample + shade
         └── hipMemcpy device → host
-  └── PNG_Writter → output PNG
+  └── PNG_Writer → output PNG
 ```
 
 ## Requirements
