@@ -4,12 +4,12 @@
 #include "hittable.hpp"
 #include "common.hpp"
 
-class sphere : public hittable {
+class sphere {
   public:
     sphere(const vec3& center, double radius) : center(center), radius(fmax(0,radius)) {}
     sphere() { }
 
-    __device__ __host__ bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
+    __device__ __host__ bool hit(const ray& r, interval ray_t, hit_record& rec) const {
         vec3 oc = center - r.origin();
         auto a = r.direction().length_squared();
         auto h = dot(r.direction(), oc);

@@ -120,7 +120,6 @@ class hittable_list {
                 rec = temp_rec;
             }
         }
-        rec.hit = false;
 
         return hit_anything;
     }
