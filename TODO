@@ -3,3 +3,5 @@
 Try to use function pointers instead of virtual functions due to the limitations of the HIP runtime
 
 Most likely seg faulting because its attempting to acess a host side array on the device side. Need to copy over to the gpu to fix it
+
+rocrand requires an array for each of the states which corresponds with a specific thread this is going to be kinda annoying ngl

@@ -48,7 +48,7 @@ int main()
 
     hipDeviceSynchronize();
 
-    PNG_Writter writter = PNG_Writter(image, 3, main_camera.get_image_height(), 512);
+    PNG_Writter writter = PNG_Writter(image, 3, main_camera.get_image_height(), 1080);
 
     writter.create_png_file();
     

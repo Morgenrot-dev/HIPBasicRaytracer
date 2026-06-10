@@ -5,7 +5,7 @@ started as a port of Peter Shirley's *Ray Tracing in One Weekend* from CPU C++ t
 GPU kernels — the interesting work wasn't the ray–sphere math, it was getting a
 design built around virtual dispatch and recursion to run correctly on a GPU.
 
-- ADD IMAGE HERE
+![Image of a sample rendered Output](render/sample_image)
 
 ## Overview
 
